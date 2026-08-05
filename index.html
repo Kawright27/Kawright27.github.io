@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Name — Software Engineer</title>
+<style>
+  :root {
+    --ink: #14181f;
+    --panel: #1c222c;
+    --paper: #f4f2ec;
+    --text: #e8e6df;
+    --muted: #8a92a3;
+    --accent: #4fa583;
+    --accent-dim: #35553f;
+    --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+    --font-sans: 'Inter', -apple-system, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--ink);
+    color: var(--text);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+  }
+
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  .wrap { max-width: 780px; margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- HERO / TERMINAL ---------- */
+  header { padding: 90px 0 60px; }
+
+  .terminal {
+    background: var(--panel);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+    border: 1px solid #2a3140;
+  }
+
+  .terminal-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    background: #232a36;
+    border-bottom: 1px solid #2a3140;
+  }
+  .dot { width: 11px; height: 11px; border-radius: 50%; }
+  .dot.red { background: #e0605a; }
+  .dot.yellow { background: #e0b95a; }
+  .dot.green { background: #5ac97a; }
+  .terminal-title {
+    margin-left: 8px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .terminal-body {
+    padding: 28px 26px 32px;
+    font-family: var(--font-mono);
+    font-size: 15px;
+  }
+
+  .prompt { color: var(--muted); }
+  .cmd { color: var(--text); }
+  .type-line { white-space: pre; overflow: hidden; border-right: 2px solid var(--accent); width: 0; animation: type 1.4s steps(20, end) forwards, blink .8s step-end infinite; }
+  @keyframes type { to { width: 20ch; } }
+  @keyframes blink { 50% { border-color: transparent; } }
+
+  .output { margin-top: 18px; color: var(--muted); }
+  .output .name { color: var(--text); font-size: 22px; font-weight: 700; display: block; margin-bottom: 4px; }
+  .output .role { color: var(--accent); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .type-line { animation: none; width: 20ch; border-right: none; }
+  }
+
+  /* ---------- SECTIONS ---------- */
+  section { padding: 56px 0; border-top: 1px solid #232a36; }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  h2 { font-size: 26px; font-weight: 700; margin-bottom: 20px; letter-spacing: -0.01em; }
+
+  p.lead { color: var(--muted); max-width: 60ch; }
+
+  /* ---------- PROJECTS AS FILE TREE ---------- */
+  .tree { font-family: var(--font-mono); font-size: 14px; }
+
+  .project {
+    display: grid;
+    grid-template-columns: 24px 1fr;
+    gap: 4px 12px;
+    padding: 18px 0;
+    border-bottom: 1px solid #232a36;
+  }
+  .project:last-child { border-bottom: none; }
+
+  .branch { color: var(--muted); }
+
+  .project-name {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--text);
+  }
+  .project-desc { grid-column: 2; color: var(--muted); font-family: var(--font-sans); font-size: 14px; margin-top: 4px; }
+  .project-stack { grid-column: 2; margin-top: 8px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--accent);
+    background: rgba(79,165,131,0.1);
+    border: 1px solid var(--accent-dim);
+    padding: 3px 8px;
+    border-radius: 4px;
+  }
+  .project-link { grid-column: 2; margin-top: 8px; font-size: 13px; }
+
+  /* ---------- SKILLS ---------- */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+  }
+  .skill-item {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    padding: 10px 12px;
+    background: var(--panel);
+    border: 1px solid #2a3140;
+    border-radius: 6px;
+    color: var(--text);
+  }
+  .skill-item::before { content: "▸ "; color: var(--accent); }
+
+  /* ---------- CONTACT ---------- */
+  .contact-links { display: flex; gap: 20px; flex-wrap: wrap; font-family: var(--font-mono); font-size: 14px; }
+
+  footer { padding: 32px 0 60px; color: var(--muted); font-family: var(--font-mono); font-size: 12px; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <div class="terminal">
+      <div class="terminal-bar">
+        <span class="dot red"></span>
+        <span class="dot yellow"></span>
+        <span class="dot green"></span>
+        <span class="terminal-title">whoami.sh</span>
+      </div>
+      <div class="terminal-body">
+        <div><span class="prompt">$</span> <span class="cmd type-line">./whoami.sh</span></div>
+        <div class="output">
+          <span class="name">Your Name</span>
+          <span class="role">Computer Science Student · Aspiring Software Engineer</span>
+          <div style="margin-top:10px;">Building things in Java. Looking for a summer internship where I can learn fast and ship real code.</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="projects">
+    <div class="eyebrow">01 — Projects</div>
+    <h2>Things I've built</h2>
+    <div class="tree">
+
+      <div class="project">
+        <span class="branch">├─</span>
+        <div>
+          <div class="project-name">expense-tracker/</div>
+          <div class="project-desc">Command-line app to log and categorize expenses, backed by SQLite. Built to practice file I/O, JDBC, and clean class design.</div>
+          <div class="project-stack">
+            <span class="tag">Java</span>
+            <span class="tag">SQLite</span>
+            <span class="tag">JDBC</span>
+          </div>
+          <div class="project-link"><a href="#">github.com/yourname/expense-tracker →</a></div>
+        </div>
+      </div>
+
+      <div class="project">
+        <span class="branch">├─</span>
+        <div>
+          <div class="project-name">notes-api/</div>
+          <div class="project-desc">A small REST API for creating and organizing notes. First project using Spring Boot — covers routing, persistence, and basic validation.</div>
+          <div class="project-stack">
+            <span class="tag">Java</span>
+            <span class="tag">Spring Boot</span>
+            <span class="tag">H2</span>
+          </div>
+          <div class="project-link"><a href="#">github.com/yourname/notes-api →</a></div>
+        </div>
+      </div>
+
+      <div class="project">
+        <span class="branch">└─</span>
+        <div>
+          <div class="project-name">library-system/</div>
+          <div class="project-desc">Menu-driven library management system modeling books, members, and loans. Focused on OOP design and relationships between classes.</div>
+          <div class="project-stack">
+            <span class="tag">Java</span>
+            <span class="tag">OOP</span>
+          </div>
+          <div class="project-link"><a href="#">github.com/yourname/library-system →</a></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="eyebrow">02 — Skills</div>
+    <h2>What I work with</h2>
+    <div class="skills-grid">
+      <div class="skill-item">Java</div>
+      <div class="skill-item">SQL</div>
+      <div class="skill-item">Git</div>
+      <div class="skill-item">Spring Boot</div>
+      <div class="skill-item">OOP Design</div>
+      <div class="skill-item">Data Structures</div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="eyebrow">03 — Contact</div>
+    <h2>Let's talk</h2>
+    <p class="lead" style="margin-bottom:20px;">Open to summer internships. Reach out any of these ways:</p>
+    <div class="contact-links">
+      <a href="mailto:you@email.com">you@email.com</a>
+      <a href="#">github.com/yourname</a>
+      <a href="#">linkedin.com/in/yourname</a>
+    </div>
+  </section>
+
+  <footer>
+    built with java, coffee, and a resume deadline.
+  </footer>
+</div>
+
+</body>
+</html>
