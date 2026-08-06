@@ -35,7 +35,7 @@
   a:focus-visible { outline: 2px solid var(--honey); outline-offset: 3px; }
 
   .page {
-    max-width: 700px;
+    max-width: 880px;
     margin: 0 auto;
     padding: 0 28px 0 56px;
     position: relative;
@@ -46,29 +46,32 @@
   }
 
   /* ---------- AMBIENT MARGIN DOODLES ---------- */
-  .margin-doodle {
-    position: fixed;
+  .doodle-field {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
     z-index: -1;
-    opacity: 0.5;
-    animation: drift 9s ease-in-out infinite;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .margin-doodle {
+    position: absolute;
+    opacity: var(--op, 0.45);
+    animation: drift var(--dur, 16s) ease-in-out infinite;
+    animation-delay: var(--delay, 0s);
   }
   .margin-doodle svg { width: 100%; height: 100%; }
-  .margin-doodle path { fill: none; stroke: var(--moss); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
-  .margin-doodle.d2 path, .margin-doodle.d4 path { stroke: var(--bark); }
-
-  .d1 { top: 12%; left: 4%; width: 46px; height: 46px; animation-delay: 0s; }
-  .d2 { top: 30%; right: 5%; width: 34px; height: 34px; animation-delay: 1.2s; animation-duration: 11s; }
-  .d3 { top: 55%; left: 6%; width: 30px; height: 30px; animation-delay: 2.4s; animation-duration: 8s; }
-  .d4 { top: 68%; right: 4%; width: 50px; height: 50px; animation-delay: 0.6s; animation-duration: 10s; }
-  .d5 { top: 84%; left: 5%; width: 26px; height: 26px; animation-delay: 3s; animation-duration: 12s; }
+  .margin-doodle path, .margin-doodle circle { fill: none; stroke: var(--c, var(--moss)); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
 
   @keyframes drift {
-    0%, 100% { transform: translateY(0) rotate(-3deg); }
-    50% { transform: translateY(-14px) rotate(3deg); }
+    0%   { transform: translateY(0) rotate(var(--r1, -3deg)); }
+    50%  { transform: translateY(var(--rise, -50px)) rotate(var(--r2, 3deg)); }
+    100% { transform: translateY(0) rotate(var(--r1, -3deg)); }
   }
 
   @media (max-width: 900px) {
-    .margin-doodle { display: none; }
+    .doodle-field { display: none; }
   }
   @media (prefers-reduced-motion: reduce) {
     .margin-doodle { animation: none; }
@@ -112,7 +115,7 @@
 
   .hero-desc {
     margin-top: 22px;
-    max-width: 46ch;
+    max-width: 60ch;
     color: var(--ink-soft);
     font-size: 16px;
   }
@@ -176,7 +179,7 @@
     color: var(--ink);
     display: inline-block;
   }
-  .project-desc { color: var(--ink-soft); font-size: 15px; margin-top: 7px; max-width: 56ch; }
+  .project-desc { color: var(--ink-soft); font-size: 15px; margin-top: 7px; max-width: 70ch; }
   .project-stack { margin-top: 11px; display: flex; gap: 8px; flex-wrap: wrap; }
   .tag {
     font-family: 'Space Grotesk', sans-serif;
@@ -217,11 +220,7 @@
 </head>
 <body>
 
-<div class="margin-doodle d1" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M6 34C10 20 20 12 34 8c0 14-10 24-28 26Z"/><path d="M6 34c4-8 10-14 18-18"/></svg></div>
-<div class="margin-doodle d2" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M20 6c-10 4-14 14-12 28 10-4 16-14 12-28Z"/></svg></div>
-<div class="margin-doodle d3" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M6 20h10M20 20h4M28 20h6" stroke-dasharray="1 6"/></svg></div>
-<div class="margin-doodle d4" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M8 30c2-14 10-22 24-24-2 14-10 22-24 24Z"/><path d="M8 30c6-10 12-16 20-20"/></svg></div>
-<div class="margin-doodle d5" aria-hidden="true"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="3"/><circle cx="20" cy="8" r="1.6"/><circle cx="20" cy="32" r="1.6"/><circle cx="8" cy="20" r="1.6"/><circle cx="32" cy="20" r="1.6"/></svg></div>
+<div class="doodle-field" id="doodleField" aria-hidden="true"></div>
 
 <div class="page">
   <header>
@@ -304,6 +303,92 @@
 
   <footer>built with java, coffee, and a resume deadline.</footer>
 </div>
+
+<script>
+  // A small library of hand-drawn style shapes (leaves, sprouts, flowers, dots)
+  const shapes = [
+    '<path d="M6 34C10 20 20 12 34 8c0 14-10 24-28 26Z"/><path d="M6 34c4-8 10-14 18-18"/>',
+    '<path d="M20 6c-10 4-14 14-12 28 10-4 16-14 12-28Z"/>',
+    '<path d="M8 30c2-14 10-22 24-24-2 14-10 22-24 24Z"/><path d="M8 30c6-10 12-16 20-20"/>',
+    '<path d="M20 6c-9 5-13 13-9 28 9-5 14-14 9-28Z"/><path d="M20 6c1 8 0 18-5 25"/>',
+    '<circle cx="20" cy="20" r="3"/><circle cx="20" cy="8" r="1.6"/><circle cx="20" cy="32" r="1.6"/><circle cx="8" cy="20" r="1.6"/><circle cx="32" cy="20" r="1.6"/>',
+    '<path d="M6 20h10M20 20h4M28 20h6" stroke-dasharray="1 6"/>',
+    '<path d="M20 30c0-14 6-20 6-20s6 6 6 20-6 4-6 4-6 10-6-4Z"/>',
+    '<circle cx="20" cy="20" r="2.4"/><path d="M20 17V9M20 23v8M17 20H9M23 20h8" />',
+  ];
+
+  const colorVars = ['--moss', '--bark', '--honey', '--ink-soft'];
+  const field = document.getElementById('doodleField');
+  const page = document.querySelector('.page');
+
+  function buildField() {
+    field.innerHTML = '';
+    const pageRect = page.getBoundingClientRect();
+    const scrollY = window.scrollY || window.pageYOffset;
+    const leftMargin = pageRect.left;
+    const rightMargin = window.innerWidth - pageRect.right;
+    const pageHeight = document.documentElement.scrollHeight;
+    field.style.height = pageHeight + 'px';
+
+    if (leftMargin < 40 && rightMargin < 40) return; // not enough room, skip
+
+    // Grid: split each side into rows so items spread evenly top-to-bottom
+    const rowsPerSide = 16;
+    const rowHeight = pageHeight / rowsPerSide;
+
+    ['left', 'right'].forEach((side) => {
+      const marginWidth = side === 'left' ? leftMargin : rightMargin;
+      if (marginWidth < 30) return;
+      // 2-3 columns within the margin depth so it fills near AND far from the page edge
+      const cols = marginWidth > 160 ? 3 : marginWidth > 90 ? 2 : 1;
+      const colWidth = marginWidth / cols;
+
+      for (let row = 0; row < rowsPerSide; row++) {
+        // not every row gets a doodle on every column - randomize density a bit
+        const activeCols = Math.random() < 0.35 ? 2 : 1;
+        const usedCols = new Set();
+        for (let c = 0; c < activeCols; c++) {
+          let col = Math.floor(Math.random() * cols);
+          if (usedCols.has(col)) continue;
+          usedCols.add(col);
+
+          const size = 20 + Math.random() * 56; // 20px - 76px
+          const yJitter = Math.random() * (rowHeight - size);
+          const y = row * rowHeight + yJitter;
+          const xJitter = Math.random() * Math.max(colWidth - size, 4);
+          const x = col * colWidth + xJitter;
+
+          const el = document.createElement('div');
+          el.className = 'margin-doodle';
+          const shape = shapes[Math.floor(Math.random() * shapes.length)];
+          el.innerHTML = `<svg viewBox="0 0 40 40">${shape}</svg>`;
+
+          el.style.width = size + 'px';
+          el.style.height = size + 'px';
+          el.style.top = y + 'px';
+          el.style[side] = x + 'px';
+
+          el.style.setProperty('--c', `var(${colorVars[Math.floor(Math.random() * colorVars.length)]})`);
+          el.style.setProperty('--op', (0.25 + Math.random() * 0.35).toFixed(2));
+          el.style.setProperty('--dur', (12 + Math.random() * 12).toFixed(1) + 's');
+          el.style.setProperty('--delay', (Math.random() * 8).toFixed(1) + 's');
+          el.style.setProperty('--rise', (-(30 + Math.random() * 55)) + 'px');
+          el.style.setProperty('--r1', (Math.random() * 8 - 4) + 'deg');
+          el.style.setProperty('--r2', (Math.random() * 8 - 4) + 'deg');
+
+          field.appendChild(el);
+        }
+      }
+    });
+  }
+
+  window.addEventListener('load', buildField);
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(buildField, 300);
+  });
+</script>
 
 </body>
 </html>
