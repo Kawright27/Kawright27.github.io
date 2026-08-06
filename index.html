@@ -3,252 +3,272 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Your Name — Software Engineer</title>
+<title>Kelsey Wright — Software Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root {
-    --ink: #1e1730;
-    --panel: #4a3267;
-    --paper: #f4f2ec;
-    --text: #ede8f5;
-    --muted: #c6bade;
-    --accent: #de638a;
-    --accent-dim: #7a3a55;
-    --font-mono: 'JetBrains Mono', 'Courier New', monospace;
-    --font-sans: 'Inter', -apple-system, sans-serif;
+  :root {
+    --paper: #f2ecdc;
+    --ink: #2f3b2a;
+    --ink-soft: #556249;
+    --rule: #c4b896;
+    --tape: #e8d9a8;
+    --honey: #b8842f;
+    --moss: #62795a;
+    --bark: #7a6f56;
+    --card: #f8f4e6;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
-    background: var(--ink);
-    color: var(--text);
-    font-family: var(--font-sans);
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, sans-serif;
     line-height: 1.6;
+    background-image:
+      repeating-linear-gradient(transparent, transparent 27px, rgba(98,121,90,0.08) 28px);
   }
 
-  a { color: var(--accent); text-decoration: none; }
-  a:hover { text-decoration: underline; }
-  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  a { color: var(--honey); text-decoration: none; }
+  a:hover { text-decoration: underline; text-decoration-style: wavy; text-underline-offset: 3px; }
+  a:focus-visible { outline: 2px solid var(--honey); outline-offset: 3px; }
 
-  .wrap { max-width: 780px; margin: 0 auto; padding: 0 24px; }
-
-  /* ---------- HERO / TERMINAL ---------- */
-  header { padding: 90px 0 60px; }
-
-  .terminal {
-    background: var(--panel);
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.35);
-    border: 1px solid #2a3140;
+  .page {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 28px 0 56px;
+    position: relative;
+    border-left: 2px solid #c98b7a;
+    margin-left: 32px;
+  }
+  @media (max-width: 640px) {
+    .page { margin-left: 12px; padding-left: 30px; border-left-width: 1.5px; }
   }
 
-  .terminal-bar {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 14px;
-    background: #232a36;
-    border-bottom: 1px solid #2a3140;
-  }
-  .dot { width: 11px; height: 11px; border-radius: 50%; }
-  .dot.red { background: #e0605a; }
-  .dot.yellow { background: #e0b95a; }
-  .dot.green { background: #5ac97a; }
-  .terminal-title {
-    margin-left: 8px;
-    font-family: var(--font-mono);
-    font-size: 12px;
-    color: var(--muted);
+  /* ---------- HERO ---------- */
+  header { padding: 70px 0 50px; position: relative; }
+
+  .tape {
+    position: absolute;
+    top: 18px; left: -18px;
+    width: 96px; height: 30px;
+    background: var(--tape);
+    opacity: 0.85;
+    transform: rotate(-5deg);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
   }
 
-  .terminal-body {
-    padding: 28px 26px 32px;
-    font-family: var(--font-mono);
+  h1 {
+    font-family: 'Caveat', cursive;
+    font-weight: 700;
+    font-size: 64px;
+    color: var(--ink);
+    line-height: 1;
+    transform: rotate(-1deg);
+    display: inline-block;
+  }
+
+  .role {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500;
     font-size: 15px;
+    color: var(--card);
+    background: var(--moss);
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 3px;
+    margin-top: 14px;
+    transform: rotate(-0.6deg);
   }
 
-  .prompt { color: var(--muted); }
-  .cmd { color: var(--text); }
-  .type-line { white-space: pre; overflow: hidden; border-right: 2px solid var(--accent); width: 0; animation: type 1.4s steps(20, end) forwards, blink .8s step-end infinite; }
-  @keyframes type { to { width: 20ch; } }
-  @keyframes blink { 50% { border-color: transparent; } }
+  .hero-desc {
+    margin-top: 22px;
+    max-width: 46ch;
+    color: var(--ink-soft);
+    font-size: 16px;
+  }
 
-  .output { margin-top: 18px; color: var(--muted); }
-  .output .name { color: var(--text); font-size: 22px; font-weight: 700; display: block; margin-bottom: 4px; }
-  .output .role { color: var(--accent); }
+  .location {
+    margin-top: 16px;
+    font-family: 'Caveat', cursive;
+    font-size: 20px;
+    color: var(--bark);
+  }
 
-  @media (prefers-reduced-motion: reduce) {
-    .type-line { animation: none; width: 20ch; border-right: none; }
+  .sprout-friend {
+    position: absolute;
+    top: 40px;
+    right: -6px;
+    width: 64px;
+    height: 64px;
+    transform: rotate(6deg);
+  }
+  @media (max-width: 640px) {
+    .sprout-friend { display: none; }
   }
 
   /* ---------- SECTIONS ---------- */
-  section { padding: 56px 0; border-top: 1px solid #232a36; }
+  section { padding: 44px 0; }
+  section + section { border-top: 1px dashed var(--rule); }
 
-  .eyebrow {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    letter-spacing: 0.08em;
-    color: var(--accent);
-    text-transform: uppercase;
-    margin-bottom: 14px;
+  h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 22px;
+    color: var(--ink);
+    margin-bottom: 24px;
+    position: relative;
+    display: inline-block;
+  }
+  h2::after {
+    content: "";
+    position: absolute;
+    left: -4px; right: -4px; bottom: -3px;
+    height: 8px;
+    background: var(--tape);
+    opacity: 0.6;
+    z-index: -1;
+    transform: rotate(-0.4deg);
   }
 
-  h2 { font-size: 26px; font-weight: 700; margin-bottom: 20px; letter-spacing: -0.01em; }
-
-  p.lead { color: var(--muted); max-width: 60ch; }
-
-  /* ---------- PROJECTS AS FILE TREE ---------- */
-  .tree { font-family: var(--font-mono); font-size: 14px; }
-
+  /* ---------- PROJECTS ---------- */
   .project {
-    display: grid;
-    grid-template-columns: 24px 1fr;
-    gap: 4px 12px;
-    padding: 18px 0;
-    border-bottom: 1px solid #232a36;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--rule);
   }
   .project:last-child { border-bottom: none; }
-
-  .branch { color: var(--muted); }
+  .project:nth-child(odd) .project-name { transform: rotate(-0.4deg); }
+  .project:nth-child(even) .project-name { transform: rotate(0.4deg); }
 
   .project-name {
-    font-family: var(--font-sans);
+    font-family: 'Space Grotesk', sans-serif;
     font-weight: 600;
-    font-size: 16px;
-    color: var(--text);
+    font-size: 17px;
+    color: var(--ink);
+    display: inline-block;
   }
-  .project-desc { grid-column: 2; color: var(--muted); font-family: var(--font-sans); font-size: 14px; margin-top: 4px; }
-  .project-stack { grid-column: 2; margin-top: 8px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .project-desc { color: var(--ink-soft); font-size: 15px; margin-top: 7px; max-width: 56ch; }
+  .project-stack { margin-top: 11px; display: flex; gap: 8px; flex-wrap: wrap; }
   .tag {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: var(--accent);
-    background: rgba(79,165,131,0.1);
-    border: 1px solid var(--accent-dim);
-    padding: 3px 8px;
-    border-radius: 4px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11.5px;
+    font-weight: 500;
+    color: var(--ink-soft);
+    background: var(--card);
+    border: 1px solid var(--rule);
+    padding: 3px 10px;
+    border-radius: 2px;
   }
-  .project-link { grid-column: 2; margin-top: 8px; font-size: 13px; }
+  .tag:nth-child(1) { transform: rotate(-1.2deg); }
+  .tag:nth-child(2) { transform: rotate(0.8deg); }
+  .tag:nth-child(3) { transform: rotate(-0.5deg); }
+  .project-link { margin-top: 10px; font-size: 13.5px; font-family: 'Space Grotesk', sans-serif; }
 
   /* ---------- SKILLS ---------- */
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 12px;
-  }
+  .skills-wrap { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; }
   .skill-item {
-    font-family: var(--font-mono);
-    font-size: 13px;
-    padding: 10px 12px;
-    background: var(--panel);
-    border: 1px solid #2a3140;
-    border-radius: 6px;
-    color: var(--text);
+    font-family: 'Caveat', cursive;
+    font-weight: 600;
+    font-size: 21px;
+    color: var(--moss);
   }
-  .skill-item::before { content: "▸ "; color: var(--accent); }
+  .skill-item::after { content: "·"; margin-left: 14px; color: var(--rule); }
+  .skill-item:last-child::after { content: ""; }
 
   /* ---------- CONTACT ---------- */
-  .contact-links { display: flex; gap: 20px; flex-wrap: wrap; font-family: var(--font-mono); font-size: 14px; }
+  .contact-links { display: flex; gap: 20px; flex-wrap: wrap; font-family: 'Space Grotesk', sans-serif; font-size: 14px; margin-top: 6px; }
 
-  footer { padding: 32px 0 60px; color: var(--muted); font-family: var(--font-mono); font-size: 12px; }
+  footer {
+    padding: 34px 0 60px;
+    color: var(--bark);
+    font-family: 'Caveat', cursive;
+    font-size: 19px;
+  }
 </style>
 </head>
 <body>
 
-<div class="wrap">
+<div class="page">
   <header>
-    <div class="terminal">
-      <div class="terminal-bar">
-        <span class="dot red"></span>
-        <span class="dot yellow"></span>
-        <span class="dot green"></span>
-        <span class="terminal-title">whoami.sh</span>
-      </div>
-      <div class="terminal-body">
-        <div><span class="prompt">$</span> <span class="cmd type-line">./whoami.sh</span></div>
-        <div class="output">
-          <span class="name">Kelsey Wright</span>
-          <span class="role">Computer Science Student at Towson University · Aspiring Software Engineer</span>
-          <div style="margin-top:10px;">Building things in Java. Looking for a summer internship where I can learn fast and ship real code.</div>
-        </div>
-      </div>
-    </div>
+    <div class="tape"></div>
+    <h1>Kelsey Wright</h1>
+    <br>
+    <span class="role">Senior at Towson University · Aspiring Software Engineer</span>
+    <p class="hero-desc">Building things in Java. Looking for a summer internship where I can learn fast and ship real code.</p>
+    <div class="location">— writing from Towson, Maryland</div>
+
+    <svg class="sprout-friend" viewBox="0 0 100 100" aria-hidden="true">
+      <ellipse cx="50" cy="60" rx="28" ry="24" fill="#f8f4e6" stroke="#556249" stroke-width="2.2"/>
+      <circle cx="41" cy="56" r="2.4" fill="#2f3b2a"/>
+      <circle cx="59" cy="56" r="2.4" fill="#2f3b2a"/>
+      <circle cx="38" cy="64" r="3.6" fill="#c98b7a" opacity="0.6"/>
+      <circle cx="62" cy="64" r="3.6" fill="#c98b7a" opacity="0.6"/>
+      <path d="M45 64c2 2 8 2 10 0" fill="none" stroke="#2f3b2a" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M50 36c-2-7 3-13 9-14-1 6-3 11-9 14Z" fill="#8fae72" stroke="#556249" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M50 36c1-5-2-10-7-12 0 5 2 9 7 12Z" fill="#a9c78d" stroke="#556249" stroke-width="1.5" stroke-linejoin="round"/>
+    </svg>
   </header>
 
   <section id="projects">
-    <div class="eyebrow">01 — Projects</div>
-    <h2>Things I've built</h2>
-    <div class="tree">
+    <h2>things I've built</h2>
 
-      <div class="project">
-        <span class="branch">├─</span>
-        <div>
-          <div class="project-name">expense-tracker/</div>
-          <div class="project-desc">A command-line expense tracker built in Java. Add, view, delete, and total up expenses by category, with data saved locally to a CSV file.</div>
-          <div class="project-stack">
-            <span class="tag">Java</span>
-            <span class="tag">OOP</span>
-            <span class="tag">File I/O</span>
-          </div>
-          <div class="project-link"><a href="https://github.com/Kawright27/expense-tracker">github.com/Kawright27/expense-tracker →</a></div>
-        </div>
+    <div class="project">
+      <span class="project-name">Expense Tracker</span>
+      <div class="project-desc">A command-line expense tracker built in Java. Add, view, delete, and total up expenses by category, with data saved locally to a CSV file.</div>
+      <div class="project-stack">
+        <span class="tag">Java</span>
+        <span class="tag">OOP</span>
+        <span class="tag">File I/O</span>
       </div>
+      <div class="project-link"><a href="https://github.com/Kawright27/expense-tracker">github.com/Kawright27/expense-tracker →</a></div>
+    </div>
 
-<div class="project">
-        <span class="branch">├─</span>
-        <div>
-          <div class="project-name">DoroTracker/</div>
-          <div class="project-desc">A study planning web app combining assignment tracking, automated schedule generation, and Pomodoro-based study sessions. Built with a group — includes user auth, full CRUD for assignments, and persistent MySQL storage.</div>
-          <div class="project-stack">
-            <span class="tag">Node.js</span>
-            <span class="tag">MySQL</span>
-            <span class="tag">Railway</span>
-          </div>
-          <div class="project-link"><a href="https://github.com/kamenran/Dorotracker">github.com/kamenran/Dorotracker →</a></div>
+    <div class="project">
+      <span class="project-name">DoroTracker</span>
+      <div class="project-desc">A study planning web app combining assignment tracking, automated schedule generation, and Pomodoro-based study sessions. Built with a group — includes user auth, full CRUD for assignments, and persistent MySQL storage.</div>
+      <div class="project-stack">
+        <span class="tag">Node.js</span>
+        <span class="tag">MySQL</span>
+        <span class="tag">Railway</span>
       </div>
+      <div class="project-link"><a href="https://github.com/kamenran/Dorotracker">github.com/kamenran/Dorotracker →</a></div>
+    </div>
 
-      <div class="project">
-        <span class="branch">└─</span>
-        <div>
-          <div class="project-name">os-shell-project/</div>
-          <div class="project-desc">A custom shell built in C++ that implements core shell commands and command execution, built to understand how shells parse and run programs under the hood.</div>
-          <div class="project-stack">
-            <span class="tag">C++</span>
-          </div>
-          <div class="project-link"><a href="https://github.com/agivens5/os-shell-project">github.com/agivens5/os-shell-project →</a></div>
-        </div>
+    <div class="project">
+      <span class="project-name">OS Shell Project</span>
+      <div class="project-desc">A custom shell built in C++ that implements core shell commands and command execution, built to understand how shells parse and run programs under the hood.</div>
+      <div class="project-stack">
+        <span class="tag">C++</span>
       </div>
+      <div class="project-link"><a href="https://github.com/agivens5/os-shell-project">github.com/agivens5/os-shell-project →</a></div>
+    </div>
   </section>
 
   <section id="skills">
-    <div class="eyebrow">02 — Skills</div>
-    <h2>What I work with</h2>
-    <div class="skills-grid">
-      <div class="skill-item">Java</div>
-      <div class="skill-item">SQL</div>
-      <div class="skill-item">Git</div>
-      <div class="skill-item">Node.js</div>
-      <div class="skill-item">MySQL</div>
-      <div class="skill-item">Data Structures</div>
-      <div class="skill-item">C++</div>
+    <h2>what I work with</h2>
+    <div class="skills-wrap">
+      <span class="skill-item">Java</span>
+      <span class="skill-item">SQL</span>
+      <span class="skill-item">Git</span>
+      <span class="skill-item">Node.js</span>
+      <span class="skill-item">MySQL</span>
+      <span class="skill-item">Data Structures</span>
+      <span class="skill-item">C++</span>
     </div>
   </section>
 
   <section id="contact">
-    <div class="eyebrow">03 — Contact</div>
-    <h2>Let's talk</h2>
-    <p class="lead" style="margin-bottom:20px;">Open to summer internships. Reach out any of these ways:</p>
-<div class="contact-links">
+    <h2>let's talk</h2>
+    <p style="color: var(--ink-soft);">Open to summer internships. Reach out any of these ways:</p>
+    <div class="contact-links">
       <a href="mailto:wkelsey474@gmail.com">wkelsey474@gmail.com</a>
       <a href="https://github.com/Kawright27">github.com/Kawright27</a>
       <a href="https://www.linkedin.com/in/kelsey-wright-a042b0338">linkedin.com/in/kelsey-wright</a>
     </div>
   </section>
 
-  <footer>
-    built with java, coffee, and a resume deadline.
-  </footer>
+  <footer>built with java, coffee, and a resume deadline.</footer>
 </div>
 
 </body>
